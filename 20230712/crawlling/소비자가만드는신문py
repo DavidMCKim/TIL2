@@ -1,0 +1,32 @@
+from bs4 import BeautifulSoup
+import requests
+
+if __name__ == "__main__" :
+    try :
+        url = 'https://www.consumernews.co.kr/news/articleList.html?view_type=sm'
+        # custom_headers = {
+        #     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+        #     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+        #     'Referer': 'https://www.dcinside.com/'
+        # }
+        # request = requests.request("GET", url, headers=custom_headers)
+
+        request = requests.request("GET", url)
+        html = request.text
+        soup = BeautifulSoup(html, "html.parser")
+        articles = soup.find_all('a', {'class':'line-height-3-2x'})
+        article_url_list = ['https://www.consumernews.co.kr' + article['href'] for article in articles]
+
+        for article_url in article_url_list:
+            request = requests.request("GET", article_url)
+            html = request.text
+            article_soup = BeautifulSoup(html, "html.parser")            
+
+            title     = article_soup.find('div', {'class':'article-head-title'}).text.strip()
+            content   = article_soup.find('div', {'id':'article-view-content-div'}).text.strip()
+            writer    = article_soup.find('i', {'class':'fa fa-user-o fa-fw'}).nextSibling.strip().split(' ')[0].strip()
+            writetime = article_soup.find('i', {'class':'fa fa-clock-o fa-fw'}).nextSibling.replace('승인', '').strip()
+        
+    except Exception as e:
+        print(e)
