@@ -1,0 +1,61 @@
+* 스프링 부트 스타터 사이트로 이동해서 스프링 프로젝트 생성
+https://start.spring.io/
+
+* Project ( 필요한 라이브러리를 땡겨오고, 빌드하는 라이프사이클까지 관리해주는 Tool )
+Maven vs Gradle ( Maven << Gradle )
+
+* Project Metadata
+ - Group  :  보통 기업 도메인명을 입력
+ - Artifact  :  빌드되어 나온 어떤 결과물
+ - Name  :  
+ - Description  :  
+ - Package name  :  
+
+* Dependencies : 어떤 라이브러리를 땡겨서 사용할꺼냐
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+gradle이 버전 설정하고 라이브러리 땡겨오는구나 정도로 이해하고
+추후에 공부하면 됨!!
+
+* build.gradle
+repositories {
+	mavenCentral()
+}
+dependencies{
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	.
+	.
+	.
+}
+>> dependencies 안에 있는 라이브러리들을 mavenCentral이라는 공개된 사이트에서 다운로드 받아라
+(필요에 따라 repositories안에 특정사이트 url을 넣으면 됨)
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+오른쪽 상단에 (코끼리모양의 아이콘)Gradle 클릭  >>  Dependencies( 라이브러리들의 의존관계 ) 
+
+* 스프링 부트 라이브러리
+	- spring-boot-starter-web
+		- spring-boot-starter-tomcat : 톰켓( 웹서버 ) 
+		- spring-webmvc : 스프링 웹 MVC
+	- spring-boot-starter-thymeleaf: 타임리프 템플릿 엔진(View)
+	- spring-boot-starter(공통) : 스프링부트 + 스프링코어 + 로깅
+		- spring-boot
+			- spring-core
+		- spring-boot-starter-logging
+			- logback, slf4j
+
+* 테스트 라이브러리
+	- junit : 테스트 프레임워크 ( 요즘엔 junit5로 넘어가는 추세 )
+	- mockito : 목 라이브러리 
+	- assertj : 테스트 코드를 좀 더 편하게 작성하게 도와주는 라이브러리
+	- spring-test : 스프링 통합 테스트 지원
+ 
+
+
