@@ -84,8 +84,7 @@ class Twitter():
                         shareCount = 0   
                         if contents != '':
                             query = f'''
-                                INSERT INTO tbScrapData (ContentType, Sno, PostNo, ChannelCode, SearchKeyWord, Url, Title, Writer, WriteTime, Contents, RegDate, ViewCount, CmtCount, SymCount, RepCount, ShareCount, HashTag, AnalysisFlag, SubUrl, Og_ImageUrl, Og_Description, ImgFlag, CompanyCode, AutoCrawlFlag)
-                                VALUES ('P', 0, 0, 4001, '{keyword}', '{url}', '{title}', '{writer}', '{wrtieTime}', '{contents}', CURRENT_TIMESTAMP, {viewCount}, {cmtCount}, {likeCount}, {reqCount}, {shareCount}, '{hashtags}', '{AnalysisFlag}', '', '{imgUrl}', '{OgDescription}', 'N', 'N', {companyCode}, '{AutoCrawlFlag}')
+
                             '''
                             MSSQLConnector.insert(query)
 
